@@ -330,15 +330,14 @@ function sendToGas4(message, isUserMessage) {
     var backButton = document.getElementById('back-to-chatbot');
     var chatbotToggle = document.getElementById('chatbot-toggle');
 
-    bookingLink.addEventListener('click', function(event) {
+       bookingLink.addEventListener('click', function(event) {
         event.preventDefault();
-        console.log('Booking link clicked'); // Debug log
         chatbotContainer.style.display = 'none';
-        calendlyContainer.style.display = 'block';
+        calendlyContainer.style.display = 'flex';
     });
-backButton.addEventListener('click', function() {
+
+    backButton.addEventListener('click', function() {
         calendlyContainer.style.display = 'none';
-        chatbotContainer.style.display = 'flex'; // Change this to 'flex' to match your CSS
-        chatbotToggle.style.display = 'block'; // Ensure the toggle button is visible
+        chatbotContainer.style.display = 'flex';
+        if (chatbotToggle) chatbotToggle.style.display = 'block';
     });
-});
