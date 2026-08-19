@@ -341,3 +341,4 @@ function sendToGas4(message, isUserMessage) {
         chatbotContainer.style.display = 'flex';
         if (chatbotToggle) chatbotToggle.style.display = 'block';
     });
+  });
