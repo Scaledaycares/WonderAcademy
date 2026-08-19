@@ -168,10 +168,15 @@ button:hover {
   border-radius: 0;
 }
 
-.chatbot-header-line,
-.booking-header-line {
+.chatbot-header-line {
   display: flex;
   align-items: flex-start;
+  gap: 12px;
+}
+
+.booking-header-line {
+  display: flex;
+  align-items: center;
   gap: 12px;
 }
 
@@ -342,7 +347,9 @@ a:hover {
   flex: 1;
 }
 
-/* Circular back button, mirroring the chat panel's close button. */
+/* Circular back button, mirroring the chat panel's close button.
+   The chevron is drawn in CSS — arrow glyphs sit high in Arial, so
+   flex centering would centre the text box and not the mark itself. */
 #calendly-widget-container #back-to-chatbot {
   position: static;
   top: auto;
@@ -358,29 +365,41 @@ a:hover {
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.35);
   color: #ffffff;
-  font-size: 16px;
+  font-size: 0;             /* hides the text label; keep aria-label on the button */
   line-height: 1;
   cursor: pointer;
+}
+
+#calendly-widget-container #back-to-chatbot::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  transform: rotate(45deg);
+  margin-left: 3px;         /* optical centring — a chevron's mass sits right */
 }
 
 #calendly-widget-container #back-to-chatbot:hover {
   background-color: rgba(0, 0, 0, 0.55);
 }
 
-/* White content area, mirroring #chatbox. */
+/* White content area, mirroring #chatbox. The iframe scrolls itself:
+   a touch drag over a cross-origin iframe never reaches this element,
+   so making it the scroll container would lock scrolling on mobile. */
 .booking-body {
   flex: 1 1 auto;
   min-height: 0;
   background-color: #ffffff;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
 }
 
-/* Class selector, so a new booking link can't break this again. */
+/* Class selector, so a new booking link can't break this again.
+   !important beats the inline pixel height form_embed.js writes. */
 .booking-body iframe {
   display: block;
   width: 100%;
-  min-height: 100%;
+  height: 100% !important;
   border: 0;
 }
 
