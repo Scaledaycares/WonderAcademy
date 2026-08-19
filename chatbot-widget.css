@@ -296,14 +296,21 @@ a:hover {
     padding: 6px 16px;
   }
 }
+/* ============================================================
+   BOOKING PANEL — replaces lines ~299-351 of chatbot-widget.css
+   (.tour-booking, #calendly-widget-container, #back-to-chatbot,
+    and the stale #NSSHfWptfupkUZRjpAgR_1719878735200 rule)
+   ============================================================ */
+
+/* Brand bar above the chat header. Was green, which matched nothing. */
 .tour-booking {
-  background-color: green;
+  flex: 0 0 auto;
+  background-color: #d9541a;
   padding: 10px;
   text-align: center;
   color: white;
   font-size: 14px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-radius: 0;
   display: block;
 }
 
@@ -317,31 +324,65 @@ a:hover {
 .tour-booking a:hover {
   text-decoration: underline;
 }
+
+/* Same shell as #chat-widget: fills the frame, no fixed size, no scale. */
 #calendly-widget-container {
-  position: fixed;
-  bottom: 45px;
-  right: -15px;
-  width: 425px; /* Increased width */
-  height: 450px; /* Adjusted height to make it square */
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
   z-index: 100;
-  display: none;
-  overflow: auto;
-  transform:scale(0.7);
-}
-#back-to-chatbot {
-   position: relative;
-  top: 30px;
-  right: 0px;
-  z-index: 105;
-  background-color: orange;
-  color: black;
-  border: 1px solid #dddddd;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
+  display: none;           /* JS switches this to 'flex' */
+  flex-direction: column;
+  background-color: #fc6f2a;
+  border-radius: 0;
+  overflow: hidden;
+  transform: none;
 }
 
+/* Back button sits in the header row, styled like the chat's close button. */
+#calendly-widget-container #back-to-chatbot {
+  position: static;
+  top: auto;
+  right: auto;
+  margin-left: auto;
+  align-self: flex-start;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#calendly-widget-container #back-to-chatbot:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* White content area, mirroring #chatbox. */
+.booking-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  background-color: #ffffff;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* No ID selector here, so a new booking link can't break it again. */
+.booking-body iframe {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+  border: 0;
+}
 
 #NSSHfWptfupkUZRjpAgR_1719878735200 {
   width: 100%; /* Make iframe take full width of the container */
